@@ -1,0 +1,22 @@
+name: Build TwitterCredentialHTTP
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install make xz ldid
+      - run: |
+          export THEOS="$HOME/theos"
+          git clone --recursive https://github.com/theos/theos.git "$THEOS"
+          rm -rf "$THEOS/sdks"
+          git clone --depth 1 https://github.com/theos/sdks.git "$THEOS/sdks"
+      - env:
+          THEOS: /Users/runner/theos
+        run: make package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TwitterCredentialHTTP-rootless
+          path: packages/*.deb
+          if-no-files-found: error
