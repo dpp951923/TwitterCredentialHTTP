@@ -1,0 +1,9 @@
+Package: com.example.twittercredentialhttp
+Name: TwitterCredentialHTTP
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Local HTTP diagnostic endpoint for app-owned Keychain and cookie inspection
+Maintainer: DP
+Author: DP
+Section: Tweaks
+Depends: firmware (>= 15.0)
